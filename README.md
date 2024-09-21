@@ -4,7 +4,7 @@
 
 ### 2024
 
-|Name|Difficulty|Category|CTF|About|
+|Name|Category|Difficulty|CTF|About|
 |---|---|---|---|---|
 |JSLess|Web|Medium|KAPO|PHP Error, Meta Refresh, CSS, CSP Report, PNA, Chrome Crash|
 |JSFull|Web|Hard|KAPO|Connection Pool XS-Leak, Keep-Alive|
@@ -16,7 +16,7 @@
 
 ### 2023
 
-|Name|Difficulty|Category|CTF|About|
+|Name|Category|Difficulty|CTF|About|
 |---|---|---|---|---|
 |NginX-mas|Web|Medium|Christmas|Nginx $host, Nginx server_name|
 |Leakless|Web|Hard|Christmas|ReDoS, Prototype Pollution, XSS|
