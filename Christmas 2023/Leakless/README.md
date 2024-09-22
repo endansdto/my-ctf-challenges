@@ -211,5 +211,5 @@ app.use(express.urlencoded({
   
 
 ## Unintended Solution
-* 대회 당시에는 `back/forword cache`를 생각지 못했습니다. `Cache-Control: no-store`이어도 `bfcache`는 동작하는 듯합니다.
+* 대회 당시에는 `back/forword cache`를 생각지 못했습니다. `Cache-Control: no-store`이어도 `bfcache`는 동작하는 듯합니다. 워게임에서는 수정되었습니다.
 * [검증되지 않음] 최근에 발견된 Node.js DoS CVE로 시도해도 Bot의 로그아웃을 방어할 수 있을 것 같습니다.
