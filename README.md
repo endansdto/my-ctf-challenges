@@ -28,3 +28,4 @@
 |TEC|Crypto|Medium|YISF|Gröbner basis|
 |Denn|Crypto|Hard|YISF|Differential Cryptanalysis on 7 rounds DES|
 |Landom Party|Crypto|Hard|YISF|LLL, Breaking Random Modules(Python, Node.js, C)|
+|H4SH Cracker|Crypto|Hard|YISF|CRC Collision, Blockchain PoW|
