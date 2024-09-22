@@ -50,7 +50,7 @@ def bot(url):
       secrets.choice(buttons).click()
       wait3.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 ```
-* Bot은 `http://mbtivy.kro.kr`로 이동하여 16개의 질문에 대한 랜덤한 답을 합니다.
+* Bot은 `http://mbtivy.kro.kr`로 이동하여 15개의 질문에 대한 랜덤한 답을 합니다.
 * URL에 대한 요청 시간을 측정한다면 Caching 여부를 확인할 수 있습니다.
 * Caching이 되었다면 봇이 선택했던 답임을 확신할 수 있습니다.
 <br/>
@@ -66,6 +66,25 @@ def bot(url):
 * 따라서 `asdf.kro.kr`와 `mbtivy.kro.kr`는 동일한 프레임으로 인식됩니다.
 * `kro.kr` 도메인을 조사하면 알 수 있듯, `내도메인.한국` 사이트에서 무료로 `*.kro.kr` 도메인을 생성할 수 있습니다.
 * `*.kro.kr` 도메인 중 하나를 생성하면 Cache Probing XS-Leak으로 봇의 첫 부분 답들을 leak할 수 있습니다.
+<br/>
+
+```python
+current_url = driver.current_url
+parsed_url = urlparse(current_url)
+driver.get(f"http://{IP}{parsed_url.path}?{parsed_url.query}")
+wait3.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+
+for i in range(15):
+    buttons = driver.find_elements(By.CLASS_NAME, 'check-button')
+    secrets.choice(buttons).click()
+    wait3.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+```
+* 이전과는 다르게 Domain을 이용하지 않고 IP를 이용하여 접속합니다. 따라서 Cache Probing을 사용하기는 어렵습니다.
+* Terjanq의 [XS-Leak Wiki](https://xsleaks.dev/)에서 [적당한 기법](https://xsleaks.dev/docs/attacks/css-tricks/)을 찾을 수 있습니다.
+    * `<a>` 태그에서 `href`를 변경하면 `:visited` 여부에 따라 파란색/보라색으로 색상이 변경됩니다.
+    * `<a>` 태그의 innerText를 매우 크게(최소 몇 만 이상) 잡으면 색상이 변경될 때 어느 정도의 딜레이가 생깁니다.
+    * JS로 프레임이 넘어갈 때의 시간 차이를 측정하면 색상이 변경되었는지 판단할 수 있고 봇이 방문한 URL인지 확인할 수 있습니다.
+* Visited Link를 이용한 방법은 status code가 404일 경우 동작하지 않으므로 봇의 앞쪽 답을 leak하긴 어렵습니다.
 <br/>
 
 ```javascript
