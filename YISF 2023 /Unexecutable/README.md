@@ -92,4 +92,4 @@ await browser.close();
 ```
 * `setJavaScriptEnabled(false)`로 JS가 비활성화입니다. 일반적인 XSS는 어렵습니다.
 * 다행히도 Chrome은 XSLT를 지원합니다. 이를 이용하여 JS 없이 Flag를 읽을 수 있습니다.
-* DiceCTF에서 차용한 기법인데 2023년 정도에 Chrome에서 관련한 CVE가 존재하는 것 같습니다.
+* DiceCTF에서 차용한 기법인데 2023년 정도에 Chrome에 관련한 CVE가 존재하는 것 같습니다.
