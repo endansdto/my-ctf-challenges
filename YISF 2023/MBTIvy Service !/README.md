@@ -68,6 +68,99 @@ def bot(url):
 * `*.kro.kr` 도메인 중 하나를 생성하면 Cache Probing XS-Leak으로 봇의 첫 부분 답들을 leak할 수 있습니다.
 <br/>
 
+```javascript
+function clickHandler() {
+    fetch('/add', { 
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: "POST",
+        body: `review-input=${document.getElementById('review-input').value}&select={{ select }}`
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data === 'success')
+            window.location.reload()
+    });
+}
+
+function parse(data) {
+    const output = {};
+
+    Object.keys(data).forEach(key => {
+        const value = data[key];
+        const keyParts = key.split('.');
+        let currentObj = output;
+
+        for (let i = 0; i < keyParts.length; i++) {
+            const part = keyParts[i];
+            if (part.indexOf('o') > 2)
+                continue;
+            else if (i === keyParts.length - 1) {
+                currentObj[part] = () => value;
+            } else {
+                currentObj[part] = currentObj[part] || {};
+                currentObj = currentObj[part];
+            }
+        }
+    });
+
+    return output;
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function messageHandler(e) {
+    function getHost(url) {
+        try {
+            return (new URL(url)).host;
+        } catch (err) {}
+    }
+
+    if (getHost(e.origin) !== CHECK.host || e.source != CHECK.source || getHost(CHECK.is_validate) === 'true')
+        return;
+        
+    const data = parse(e.data);
+    if (getCookie('develop_hash') !== '45a29cef0f0a8a0c06f6244edc474be1ecd757a070d1ea9a982410a630b34908')
+        return;	
+        
+    const develop_url = data.url();
+    if (/^[\x00-\x7F]*$/.test(develop_url) && develop_url[0] !== '/')
+        window.location = '/' + develop_url + encodeURIComponent(btoa(review.join()));
+    
+    
+}
+
+review = {{ review|tojson }};
+review_div = document.getElementsByClassName('review')[0];
+window.review.map(r => {
+    const div = document.createElement("div");
+    div.classList.add("message");
+    if (window.Sanitizer)
+        div.setHTML(r);
+    else
+        div.innerHTML = DOMPurify.sanitize(r)
+    review_div.appendChild(div);
+});
+
+window.onmessage = (e) => setTimeout(() => messageHandler(e), 150);
+document.getElementById("review-button").addEventListener("click", clickHandler);
+
+CHECK = {host: "localhost", source: window, is_validate: 'http://true'};
+```
+* 댓글을 Json으로 받아와 `Sanitizer API` 또는 `DOMPurify`로 살균한 뒤 추가합니다. (Chrome Bot의 버전이 127이기 때문에 Sanitizer API를 사용할 수 있습니다)
+* `onmessage`를 통해 특정 메시지를 전송할 수 있습니다.
+* `Sanitizer API`는 Dom Clobbering을 방어하지 않기 때문에 `getElementById`를 덮어쓴다면 오류가 발생하여 `CHECK` 변수가 초기화되지 않습니다.
+* `e.origin`은 요청 페이지가 sandbox iframe일 경우 `null`이기 때문에 우회할 수 있습니다.
+* `e.source`는 요청 페이지가 바로 닫힐 경우 원본 객체를 잃어버리기 때문에 우회할 수 있습니다.
+* `CHECK.is_validate`는 Dom Clobbering으로 조건에 맞는 값을 채울 수 있습니다.
+* `develop_hash`를 설정하기 위해서는 일반적으로 cookie의 접근이 필요합니다.
+* 
+
 
 
 ## Unintended Solution 
