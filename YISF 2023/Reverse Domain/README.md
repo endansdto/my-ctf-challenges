@@ -31,7 +31,7 @@ app.use(async (req, res, next) => {
 * Express의 `req.method`는 HTTP Method를 대문자로 반환합니다. GET 요청의 경우 `GET`을 반환합니다.
 <br/>
   
-![https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023%20/Reverse%20Domain/20240922_180856.png](https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023%20/Reverse%20Domain/20240922_180856.png)
+![https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/Reverse%20Domain/20240922_180856.png](https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/Reverse%20Domain/20240922_180856.png)
 [https://expressjs.com/en/5x/api.html#routing-methods](https://expressjs.com/en/5x/api.html#routing-methods)
 * Express 문서를 확인하여 `m-search`를 찾고 해당 HTTP Method로 요청합니다.
 <br/>
