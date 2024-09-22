@@ -75,7 +75,7 @@ $name .= '.png';
 * 웹브라우저에서는 Content-Type을 확인하고 이미지로 인식하여 XSS와 같은 공격이 어렵습니다.
 <br/>
 
-![https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023%20/Unexecutable/20240922_181518.png](https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023%20/Unexecutable/20240922_181518.png)
+![https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/Unexecutable/20240922_181518.png](https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/Unexecutable/20240922_181518.png)
 [https://x.com/YNizry/status/1582733545759330306](https://x.com/YNizry/status/1582733545759330306)
 
 * 요약하면 Apache는 `.....png`, `.png`와 같은 파일에 대해 Content-Type 헤더를 사용하지 않습니다.
