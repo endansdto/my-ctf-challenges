@@ -58,8 +58,17 @@ def bot(url):
 ![https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/MBTIvy%20Service%20!/20240922_191018.png](https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/MBTIvy%20Service%20!/20240922_191018.png)
 [https://developer.chrome.com/blog/http-cache-partitioning?hl=ko](https://developer.chrome.com/blog/http-cache-partitioning?hl=ko)
 * 다만 Cache Partitioning 동작을 염두해야 합니다.
-* 요약하면 Chrome의 `요청하는 프레임 + 요청하는 프레임의 최상위 프레임`을 기준으로 캐싱합니다.
-* 최상위 프레임이 `http://mbtivy.kro`
+* 링크를 요약하면 Chrome은 `요청하는 프레임 + 요청하는 프레임의 최상위 프레임`을 기준으로 캐싱합니다.
+* Bot이 답들을 선택할 때의 Caching을 생각하면 최상위 프레임이 `http://mbtivy.kro.kr`이며 요청하는 프레임도 이와 동일할 것입니다.
+* Cross-Site에서의 Caching을 생각하면 요청하는 프레임은 동일하지만 최상위 프레임이 `http://mbtivy.kro.kr`이 아니기 때문에 Caching으로 XS-Leak을 수행하기 어렵습니다.
+* 자세하게 Caching 기준을 확인하면 프레임의 `scheme://eTLD+1`이 기준입니다.
+* `mbtivy.kro.kr`에서 `eTLD`를 확인하면 `.kr`이 `eTLD`이며 `.kro.kr`는 `eTLD+1`입니다.
+* 따라서 `asdf.kro.kr`와 `mbtivy.kro.kr`는 동일한 프레임으로 인식됩니다.
+* `kro.kr` 도메인을 조사하면 알 수 있듯, `내도메인.한국` 사이트에서 무료로 `*.kro.kr` 도메인을 생성할 수 있습니다.
+* `*.kro.kr` 도메인 중 하나를 생성하면 Cache Probing XS-Leak으로 봇의 첫 부분 답들을 leak할 수 있습니다.
+<br/>
+
+
 
 ## Unintended Solution 
   
