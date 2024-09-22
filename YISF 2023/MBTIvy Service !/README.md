@@ -53,7 +53,13 @@ def bot(url):
 * Bot은 `http://mbtivy.kro.kr`로 이동하여 16개의 질문에 대한 랜덤한 답을 합니다.
 * URL에 대한 요청 시간을 측정한다면 Caching 여부를 확인할 수 있습니다.
 * Caching이 되었다면 봇이 선택했던 답임을 확신할 수 있습니다.
+<br/>
 
+![https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/MBTIvy%20Service%20!/20240922_191018.png](https://github.com/endansdto/my-ctf-challenges/blob/main/YISF%202023/MBTIvy%20Service%20!/20240922_191018.png)
+[https://developer.chrome.com/blog/http-cache-partitioning?hl=ko](https://developer.chrome.com/blog/http-cache-partitioning?hl=ko)
+* 다만 Cache Partitioning 동작을 염두해야 합니다.
+* 요약하면 Chrome의 `요청하는 프레임 + 요청하는 프레임의 최상위 프레임`을 기준으로 캐싱합니다.
+* 최상위 프레임이 `http://mbtivy.kro`
 
 ## Unintended Solution 
   
