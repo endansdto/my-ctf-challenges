@@ -6,7 +6,7 @@
 
 |Name|Category|Difficulty|CTF|About|
 |---|---|---|---|---|
-|JSLess|Web|Medium|KAPO|PHP Error, Meta Refresh, CSS, CSP Report, PNA, Chrome Crash|
+|[JSLess](https://github.com/endansdto/my-ctf-challenges/tree/main/KAPO%202024/JSLess)|Web|Medium|KAPO|PHP Error, Meta Refresh, CSS, CSP Report, PNA, Chrome Crash|
 |JSFull|Web|Hard|KAPO|Connection Pool XS-Leak, Keep-Alive|
 |Nivy Service !|Web|Hard|YISF|HTML&CSS Injection, STTF, Blink Crash, XS-Leak, SDDES, FQDN, mXSS, CSP Bypass|
 |Letter Sender|Web|Hard|YISF|MySQL padding, SQLi WAF Bypass, Race Condition, Python Invalid Parser|
