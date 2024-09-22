@@ -171,6 +171,7 @@ document.getElementById("review-button").addEventListener("click", clickHandler)
 
 CHECK = {host: "localhost", source: window, is_validate: 'http://true'};
 ```
+* 초기 문제 구상에서는 두 개의 XS-Leak만을 고려했으나 문제가 쉬운 것 같아 추가한... 것들입니다.
 * 댓글을 JSON으로 받아와 `Sanitizer API` 또는 `DOMPurify`로 살균한 뒤 추가합니다. (Chrome Bot의 버전이 127이기 때문에 Sanitizer API를 사용할 수 있습니다)
 * `onmessage`를 통해 특정 메시지를 전송할 수 있습니다.
 * `Sanitizer API`는 Dom Clobbering을 방어하지 않기 때문에 `getElementById`를 덮어쓴다면 오류가 발생하여 `CHECK` 변수가 초기화되지 않습니다.
