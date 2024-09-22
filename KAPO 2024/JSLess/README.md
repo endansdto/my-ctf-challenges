@@ -57,7 +57,7 @@ await browser.close();
 <br/>
 
 ```php
-/secret.php
+//secret.php
 <?php
 	header('Content-Type: text/css');
 
@@ -73,6 +73,9 @@ await browser.close();
 * 이때 CSP를 걸고 `report-uri` 기능을 사욛하면 `/$secret`으로 불러오려던 요청이 CSP 정책에 걸려 오류가 발생하고 오류는 `report-uri`에 명시된 URL로 전송됩니다.
 * 전송된 내용을 확인하면 `$secret`으로 위배된 요청을 했다는 메시지가 보이며 `$secret`을 유출할 수 있습니다.
 <br/>
+
+* 이때 단순하게 `http://123.123.123.123`과 같은 주소를 이용하여 익스플로잇을 진행하면 PNA에 걸릴 수 있습니다.
+* https를 사용하면 PNA에 걸리지 않으니 https를 사용하여 익스플로잇을 진행해야 합니다.
 
 ```javascript
 app.use((req, res, next) => {
