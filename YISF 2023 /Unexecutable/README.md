@@ -100,3 +100,7 @@ await browser.close();
 * DiceCTF에서 차용한 기법인데 2023년 정도에 Chrome에 관련한 CVE가 존재하는 것 같습니다.
 <br/>
 
+## Unintended Solution
+
+* `$filter`에서 이중인코딩을 통해 `.`이나 `/`를 사용할 수 있었습니다.
+* `$img`에서 dechunk를 사용하지 않고 데이터를 생성할 때 적당히 Chrome에서 인식할 정도의 더미데이터를 붙게 하여 XSLT로 실행할 수 있었습니다.
