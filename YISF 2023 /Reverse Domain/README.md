@@ -52,7 +52,6 @@ if (real_ips.every((real_ip, i) => real_ip[0] === req.session.ips[i]))
   return res.send(FLAG);
 ```
 * [https://nip.io/](https://nip.io/)와 같은 서비스를 이용하면 `123.123.123.123.nip.io` -> `123.123.123.123` 처럼 아이피에 대한 Domain을 쉽게 찾을 수 있습니다.
-<br/>
 
 ## Unintended Solution
 * 직접 DNS Server를 구축하여 아이피에 대한 Domain을 생성하여 풀이한 참가자가 존재했습니다.
