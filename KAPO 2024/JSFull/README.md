@@ -1,4 +1,4 @@
-# JSLess
+# JSFull
 
 * Category: Web
 * Difficulty: Hard
@@ -20,7 +20,7 @@ Dreamhack.io 포팅 예정
 ```javascript
 app.use((req, res, next) => {
     res.setHeader("Content-Security-Policy", "default-src 'self'; frame-ancestors 'none';");
-	res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+    res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
     res.setHeader("X-Frame-Options", "deny");
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
     res.setHeader("Document-Policy", "force-load-at-top");
     res.setHeader("Referrer-Policy", "no-referrer");
 	
-	next();
+    next();
 });
 ```
 * CSP가 self로 잡혀있고 Cache는 no-store입니다.
