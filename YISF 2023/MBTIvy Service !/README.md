@@ -152,16 +152,26 @@ document.getElementById("review-button").addEventListener("click", clickHandler)
 
 CHECK = {host: "localhost", source: window, is_validate: 'http://true'};
 ```
-* 댓글을 Json으로 받아와 `Sanitizer API` 또는 `DOMPurify`로 살균한 뒤 추가합니다. (Chrome Bot의 버전이 127이기 때문에 Sanitizer API를 사용할 수 있습니다)
+* 댓글을 JSON으로 받아와 `Sanitizer API` 또는 `DOMPurify`로 살균한 뒤 추가합니다. (Chrome Bot의 버전이 127이기 때문에 Sanitizer API를 사용할 수 있습니다)
 * `onmessage`를 통해 특정 메시지를 전송할 수 있습니다.
 * `Sanitizer API`는 Dom Clobbering을 방어하지 않기 때문에 `getElementById`를 덮어쓴다면 오류가 발생하여 `CHECK` 변수가 초기화되지 않습니다.
 * `e.origin`은 요청 페이지가 sandbox iframe일 경우 `null`이기 때문에 우회할 수 있습니다.
 * `e.source`는 요청 페이지가 바로 닫힐 경우 원본 객체를 잃어버리기 때문에 우회할 수 있습니다.
 * `CHECK.is_validate`는 Dom Clobbering으로 조건에 맞는 값을 채울 수 있습니다.
-* `develop_hash`를 설정하기 위해서는 일반적으로 cookie의 접근이 필요합니다.
-* 
-
-
+* `develop_hash`를 설정하기 위해서는 일반적으로 cookie의 접근이 필요해보이나 우회가 가능합니다.
+    * Dom Clobbering으로 `document.cookie`를 덮으면 HTML 객체입니다.
+    * parse 함수에서 `constructor`와 `prototype`으로 `prototype pollution`이 발생합니다.
+    * `Object.toString`을 `() => 'a=hello'`로 덮게 되면 `getCookie('a')`는 `hello`를 반환합니다.
+* `develop_url`를 적당하게 세팅하면 임의의 URL로 Flag가 담긴 댓글이 전송됩니다. 
 
 ## Unintended Solution 
+
+* 매우 큰 크기의 페이지를 생성하거나 http 요청을 멈추는 등의 방식을 통해 Bot의 Timeout을 늘릴 수 있습니다.
+    * DNS Rebinding을 사용하여 XS-Leak을 수행한 이후의 과정을 우회할 수 있습니다
+    * DNS Rebinding은 워게임에서 막아두었으나 Bot Timeout은 막지 않았습니다.
+* Cache probing + Visited Link을 이용하지 않고 Connection Pool + Error를 이용하여 봇의 답들을 leak할 수 있습니다.
+    * Chrome의 Connection Pool을 모두 막고 `w=open(...)`으로 leak하고 싶은 URL을 엽니다.
+    * `w.origin`이 오류를 일으킨다면 Cache가 동작한 것이므로 봇이 방문했던 URL이며, 오류를 일으키지 않는다면 Caching되지 않은 것이므로 봇이 방문하지 않은 URL입니다.
+    * 이때 Cache Partitioning은 최상위 프레임과 요청 프레임 모두 `http://mbtivy.kro.kr`이기 때문에 정상적으로 동작합니다.
+    * 인텐 풀이와 차이는 존재하지만 창의적이고 충분히 난이도 있다 판단하여 워게임에서 막아두지 않았습니다.
   
