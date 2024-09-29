@@ -70,7 +70,7 @@ await browser.close();
 * `$whatUwant`와 `$secret`을 합쳐서 출력합니다.
 * CSS 파일은 Chrome의 SOP 정책에 위배되지 않기 때문에 Cross-Site에서 CSS로 로드할 수 있습니다.
 * `/secret.php?whatUwant=@import '`를 `link` 태그를 사용하여 CSS 파일로 가져오면 CSS가 실행되고 `$secret`을 path로 하여 `@import`를 시도합니다.
-* 이때 CSP를 걸고 `report-uri` 기능을 사욛하면 `/$secret`으로 불러오려던 요청이 CSP 정책에 걸려 오류가 발생하고 오류는 `report-uri`에 명시된 URL로 전송됩니다.
+* 이때 CSP를 걸고 `report-uri` 기능을 사용하면 `/$secret`으로 불러오려던 요청이 CSP 정책에 걸려 오류가 발생하고 오류는 `report-uri`에 명시된 URL로 전송됩니다.
 * 전송된 내용을 확인하면 `$secret`으로 위배된 요청을 했다는 메시지가 보이며 `$secret`을 유출할 수 있습니다.
 <br/>
 
